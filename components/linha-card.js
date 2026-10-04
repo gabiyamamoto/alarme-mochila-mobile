@@ -26,11 +26,11 @@ const styles = StyleSheet.create({
     titulo: {
         fontSize: 15,
         fontWeight: "600",
-        color: cores.texto,
+        color: cores.texto
     },
     subtitulo: {
         fontSize: 13,
         color: cores.textoSuave,
-        marginTop: 2,
+        marginTop: 2
     }
 });
