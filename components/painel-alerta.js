@@ -145,5 +145,31 @@ const styles = StyleSheet.create({
         width: 160,
         borderWidth: 1.5,
         borderColor: "#8a4a63",
+        borderRadius: 16,
+        padding: 12,
+        fontSize: 22,
+        textAlign: "center",
+        color: "#fff",
+        letterSpacing: 6,
+    },
+
+    pinErro: {
+        color: "#ffb4b8",
+        marginTop: 8,
+    },
+
+    botao: {
+        marginTop: 20,
+        alignSelf: "stretch",
+        backgroundColor: cores.salmao,
+        borderRadius: 28,
+        paddingVertical: 16,
+        alignContent: "center",
+    },
+
+    botao: {
+        fontSize: 17,
+        fontWeight: "700",
+        color: "#3f0f27",
     },
 })
