@@ -1,8 +1,8 @@
 import { Link } from "expo-router";
 import { ScrollView, StyleSheet, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useAlarme } from "../../hooks/useAlarme";
-import { cores } from "../../styles/cores";
+import { useAlarme } from "../../hooks/use-alarme";
+import { cores } from "../../constants/cores";
 import { CardPrincipal, LeituraSensores } from "../../components/card-principal";
 import { CardConexao, CardSensibilidade } from "../../components/card-status";
 import { CardHistorico } from "../../components/card-historico";

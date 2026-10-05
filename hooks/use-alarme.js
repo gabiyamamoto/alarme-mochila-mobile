@@ -7,7 +7,7 @@ import NetInfo from "@react-native-community/netinfo";
 const PIN_CORRETO = "1234";
 const SEGUNDOS_CONTAGEM = 60;
 
-export function useAlarm() {
+export function useAlarme() {
   const [dados, setDados] = useState({
     x: 0,
     y: 0,
