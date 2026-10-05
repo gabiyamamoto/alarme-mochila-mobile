@@ -113,7 +113,7 @@ export function useAlarm() {
       return;
     }
     const timer = setTimeout(() => setSegundos((s) => s - 1), 1000);
-    
+
     return () => clearTimeout(timer);
   }, [estado, segundos]);
 
