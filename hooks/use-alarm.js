@@ -106,12 +106,14 @@ export function useAlarm() {
   }, [online, fila]);
 
   useEffect(() => {
-    if (estado === "contagem") return;
+    if (estado !== "contagem") return;
+
     if (segundos <= 0) {
       dispararAlarme();
       return;
     }
     const timer = setTimeout(() => setSegundos((s) => s - 1), 1000);
+    
     return () => clearTimeout(timer);
   }, [estado, segundos]);
 
