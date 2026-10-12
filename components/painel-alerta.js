@@ -39,8 +39,8 @@ export function PainelAlerta({ tocando, segundos, pin, onMudarPin, pinErrado, on
     });
 
     return (
-        <SafeAreaView>
-            <View>
+        <SafeAreaView style={styles.safe}>
+            <View style={styles.conteudo}>
                 <Text style={styles.topo}>Alerta!</Text>
 
                 <View style={styles.aneisArea}>
@@ -56,7 +56,11 @@ export function PainelAlerta({ tocando, segundos, pin, onMudarPin, pinErrado, on
                     </View>
                 </View>
 
-                <Text>{tocando ? "O aviso com a localização foi enviado ao dono." : `Digite o PIN em ${segundos}s ou a sirene vai tocar.`}</Text>
+                <Text style={styles.texto}>
+                    {tocando
+                        ? "O aviso com a localização foi enviado ao dono."
+                        : `Digite o PIN em ${segundos}s ou a sirene vai tocar.`}
+                </Text>
 
                 <TextInput
                     style={[
@@ -87,11 +91,13 @@ export function PainelAlerta({ tocando, segundos, pin, onMudarPin, pinErrado, on
 const styles = StyleSheet.create({
     safe: {
         flex: 1,
+        backgroundColor: cores.alertaFundo,
     },
 
     conteudo: {
         flex: 1,
         alignItems: "center",
+        justifyContent: "center",
         padding: 24,
     },
 
@@ -99,6 +105,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: "700",
         color: "#fff",
+        textAlign: "center",
     },
 
     aneisArea: {
@@ -121,7 +128,7 @@ const styles = StyleSheet.create({
         width: 170,
         height: 170,
         borderRadius: 85,
-        backgroundColor: cores.alertaCIrculo,
+        backgroundColor: cores.alertaCirculo,
         alignItems: "center",
         justifyContent: "center",
     },
@@ -164,10 +171,10 @@ const styles = StyleSheet.create({
         backgroundColor: cores.salmao,
         borderRadius: 28,
         paddingVertical: 16,
-        alignContent: "center",
+        alignItems: "center",
     },
 
-    botao: {
+    botaoTexto: {
         fontSize: 17,
         fontWeight: "700",
         color: "#3f0f27",

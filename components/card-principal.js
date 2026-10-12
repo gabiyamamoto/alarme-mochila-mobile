@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     },
     leitura: {
         flex: 1,
-        backgroundColor: cores.Card,
+        backgroundColor: cores.card,
         borderRadius: 16,
         paddingVertical: 10,
         alignItems: "center",
