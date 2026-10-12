@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet} from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import {cores} from '../styles/cores';
+import {cores} from '../constants/cores';
 import {LinhaCard} from './linha-card';
 
 export function CardConexao({online, quantidadeFila}) {

@@ -28,7 +28,7 @@ export function CardHistorico({ log }) {
     );
 }
 
-const styles = StyleSheet = StyleSheet.create({
+const styles = StyleSheet.create({
     cardHistorico: {
         backgroundColor: cores.card,
         borderRadius: 20,
