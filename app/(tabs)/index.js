@@ -1,17 +1,16 @@
-import { Link } from "expo-router";
 import { ScrollView, StyleSheet, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useAlarme } from "../../hooks/useAlarme";
-import { cores } from "../../styles/cores";
+import { useAlarm } from "../../hooks/use-alarm";
+import { cores } from "../../constants/cores";
 import { CardPrincipal, LeituraSensores } from "../../components/card-principal";
 import { CardConexao, CardSensibilidade } from "../../components/card-status";
 import { CardHistorico } from "../../components/card-historico";
 import { PainelAlerta } from "../../components/painel-alerta";
 
 export default function AlarmeMochila() {
-  const alarme = useAlarme();
+  const alarme = useAlarm();
 
-  if (alarme.estado === "tocando") {
+  if (alarme.estado === "contagem" || alarme.estado === "tocando") {
     return (
       <PainelAlerta
         tocando={alarme.estado === "tocando"}
@@ -31,7 +30,10 @@ export default function AlarmeMochila() {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <ScrollView contentContainerStyle={styles.container}>
+      <ScrollView
+        style={styles.scrollView}
+        contentContainerStyle={styles.container}
+      >
         <Text style={styles.title}>Alarme de Mochila</Text>
         <CardPrincipal
           armado={armado}
@@ -59,8 +61,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: cores.fundo,
   },
-  container: {
+  scrollView: {
     flex: 1,
+  },
+  container: {
+    flexGrow: 1,
     padding: 20,
     gap: 20,
   },

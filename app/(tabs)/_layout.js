@@ -19,13 +19,6 @@ export default function TabsLayout() {
           headerTitle: "Projeto Base",
         }}
       />
-      <Tabs.Screen
-        name="aulas"
-        options={{
-          title: "Aulas",
-          headerTitle: "Conteúdo",
-        }}
-      />
     </Tabs>
   );
 }
