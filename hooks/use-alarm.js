@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react"; //O useRef serve para guardar um valor ou uma referência de um componente que persiste entre as renderizações sem causar uma nova renderização (re-render) na tela
-import { useAudioPlayer } from "expo-audio";
+import { setAudioModeAsync, useAudioPlayer } from "expo-audio";
 import { Accelerometer } from "expo-sensors";
 import * as Location from "expo-location";
 import NetInfo from "@react-native-community/netinfo";
@@ -18,12 +18,13 @@ export function useAlarm() {
   const [segundos, setSegundos] = useState(SEGUNDOS_CONTAGEM);
   const [pin, setPin] = useState("");
   const [pinErrado, setPinErrado] = useState(false);
-  const [limite, setLimite] = useState(0.5); //seta o limite q dispara o alarme, se a magnitude for maior q 0.5 dispara o alarme
+  const [limite, setLimite] = useState(0.5);
   const [online, setOnline] = useState(true);
   const [fila, setFila] = useState([]);
   const [log, setLog] = useState([]);
   const player = useAudioPlayer(require("../assets/sirene.mp3"));
   const estadoRef = useRef(estado);
+  const leituraAnteriorRef = useRef(null);
   estadoRef.current = estado;
 
   const addLog = (msg) => {
@@ -48,6 +49,7 @@ export function useAlarm() {
   function iniciarContagem() {
     setSegundos(SEGUNDOS_CONTAGEM);
     setEstado("contagem");
+    estadoRef.current = "contagem";
     addLog("Movimento detectado!");
   }
 
@@ -83,12 +85,29 @@ export function useAlarm() {
       setDados({ x, y, z });
       const mag = Math.sqrt(x * x + y * y + z * z); //parado = 1g
       setMagnitude(mag);
-      if (estadoRef.current === "armado" && Math.abs(mag - 1) > limite) {
+      const leituraAnterior = leituraAnteriorRef.current;
+      leituraAnteriorRef.current = { x, y, z };
+
+      if (
+        leituraAnterior &&
+        estadoRef.current === "armado" &&
+        Math.sqrt(
+          (x - leituraAnterior.x) ** 2 +
+            (y - leituraAnterior.y) ** 2 +
+            (z - leituraAnterior.z) ** 2,
+        ) > limite
+      ) {
         iniciarContagem();
       }
     });
     return () => sub.remove();
   }, [limite]);
+
+  useEffect(() => {
+    setAudioModeAsync({ playsInSilentMode: true }).catch((error) => {
+      console.error("Erro ao configurar o áudio da sirene:", error);
+    });
+  }, []);
 
   useEffect(() => {
     const unsubscribe = NetInfo.addEventListener((state) =>
@@ -119,6 +138,7 @@ export function useAlarm() {
 
   async function dispararAlarme() {
     setEstado("tocando");
+    estadoRef.current = "tocando";
     player.loop = true;
     player.seekTo(0);
     player.play();
