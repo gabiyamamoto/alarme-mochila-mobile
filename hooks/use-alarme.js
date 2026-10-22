@@ -79,15 +79,25 @@ export function useAlarme() {
   }
 
   useEffect(() => {
+    // O sensor será consultado a cada 100 ms (aproximadamente 10 leituras por segundo).
+    // Ele fica ouvindo mesmo com o alarme desligado para atualizar os valores exibidos na tela.
     Accelerometer.setUpdateInterval(100);
 
     const sub = Accelerometer.addListener(({ x, y, z }) => {
+      // x, y e z representam a aceleração em cada eixo do celular, incluindo a gravidade.
       setDados({ x, y, z });
-      const mag = Math.sqrt(x * x + y * y + z * z); //parado = 1g
+      // A magnitude resume os três eixos em um único valor; com o celular parado, fica perto de 1 g.
+      // Esse valor é mostrado na tela. A detecção abaixo compara as leituras entre si.
+      const mag = Math.sqrt(x * x + y * y + z * z);
       setMagnitude(mag);
+
       const leituraAnterior = leituraAnteriorRef.current;
+      // Guardamos a leitura atual para compará-la com a próxima sem provocar renderizações extras.
       leituraAnteriorRef.current = { x, y, z };
 
+      // Só disparamos a contagem se houver uma leitura anterior, o alarme estiver armado
+      // e a mudança entre as duas leituras superar o limite de sensibilidade.
+      // Um limite menor deixa o alarme mais sensível a movimentos leves.
       if (
         leituraAnterior &&
         estadoRef.current === "armado" &&
@@ -100,6 +110,9 @@ export function useAlarme() {
         iniciarContagem();
       }
     });
+
+    // Ao mudar a sensibilidade, este efeito é recriado. Ao sair da tela, removemos
+    // a inscrição antiga para evitar manter ouvintes do acelerômetro ativos sem necessidade.
     return () => sub.remove();
   }, [limite]);
 

@@ -1,6 +1,6 @@
 import { ScrollView, StyleSheet, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useAlarm } from "../../hooks/use-alarm";
+import { useAlarme } from "../../hooks/use-alarme";
 import { cores } from "../../constants/cores";
 import { CardPrincipal, LeituraSensores } from "../../components/card-principal";
 import { CardConexao, CardSensibilidade } from "../../components/card-status";
@@ -8,7 +8,7 @@ import { CardHistorico } from "../../components/card-historico";
 import { PainelAlerta } from "../../components/painel-alerta";
 
 export default function AlarmeMochila() {
-  const alarme = useAlarm();
+  const alarme = useAlarme();
 
   if (alarme.estado === "contagem" || alarme.estado === "tocando") {
     return (
