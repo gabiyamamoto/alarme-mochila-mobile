@@ -16,15 +16,6 @@ export default function TabsLayout() {
         },
         tabBarStyle: {
           display: "none",
-          backgroundColor: cores.card,
-          borderTopColor: cores.cardClaro,
-          paddingBottom: 8,
-        },
-        tabBarActiveTintColor: cores.roxo,
-        tabBarInactiveTintColor: cores.textoSuave,
-        tabBarLabelStyle: {
-          fontSize: 12,
-          fontWeight: "600",
         },
         headerTitle: "Mochila Segura",
       }}
