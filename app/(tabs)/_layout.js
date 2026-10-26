@@ -20,6 +20,7 @@ export default function TabsLayout() {
         headerTitle: "Mochila Segura",
       }}
     >
+      <Tabs.Screen name="index" />
     </Tabs>
   );
 }

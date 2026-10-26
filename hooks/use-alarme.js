@@ -5,7 +5,7 @@ import * as Location from "expo-location";
 import NetInfo from "@react-native-community/netinfo";
 
 const PIN_CORRETO = "1234";
-const SEGUNDOS_CONTAGEM = 60;
+const SEGUNDOS_CONTAGEM = 20;
 
 export function useAlarme() {
   const [dados, setDados] = useState({
